@@ -8,6 +8,7 @@
 // corvette Merkury sunk off Benghazi, Real Madrid 5-1 PSV).
 //
 // This program copies that image to $MAKEFUN_OUTPUT_DIR/entry.png.
+// The copy is byte-for-byte: no re-encoding, no resizing, no metadata changes.
 // It reads nothing else, reaches no network, and writes the same bytes
 // on every run: a plain copy of a fixed file.
 //
@@ -21,6 +22,7 @@ import { fileURLToPath } from "node:url";
 const MAX_BYTES = 1048576; // 1 MiB, the bounty gate
 const MAX_PIXELS = 1024; // 1024 by 1024 at most
 
+// Fail loudly on any problem: a bad image must never reach the output.
 function fail(message: string): never {
   console.error(`news-image-20261124: ${message}`);
   process.exit(1);
